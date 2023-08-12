@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+</head>
+<body>
+   
+    <div id="main">
+        
+                    <div id="panel">
+                        <h3 style="text-align: center;">Click the bubble as shown in the Hit box</h3>
+                        <div id="paneltop">
+                            <div class="elem">
+                                <div id="score">Hit
+                                    <div id="newhit" class="box">
+                                        5
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="elem">
+                                <div id="score">Timer
+                                    <div id="timer" class="box">
+                                        5
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="elem">
+                                <div id="score">Score
+                                    <div id="scr" class="box">
+                                       5
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div id="pnlbtm">
+                            <div id="bubble" >5</div>
+                        </div>
+                    </div>
+    </div>
+    <script>
+       
+            var clutter = ""
+        for(var i=1;i<=200;i++)
+        {
+                    var val = Math.floor(Math.random()*10);
+                clutter +=`<div id="bubble">${val}</div>`;
+        }
+        document.querySelector("#pnlbtm").innerHTML = clutter;  
+    
+            
+        
+        var score = 0;
+        var hitrn = 0;
+        function nhit()
+        {
+            hitrn= Math.floor(Math.random()*10);
+            document.querySelector("#newhit").textContent = hitrn;
+
+        }
+        function scorecalc(){
+                score += 10;
+                document.querySelector("#scr").textContent = score;
+
+        }
+        function runTime(){
+        var timer = 60;
+        
+            setInterval(function(){
+                if(timer>0)
+               {
+                timer--; 
+                document.querySelector("#timer").textContent = timer;   
+                }
+                else{
+                    clearInterval(timer);
+                    document.querySelector("#pnlbtm").innerHTML = "";
+                }
+               
+
+
+            },1000)
+        }
+
+        document.querySelector("#pnlbtm").addEventListener("click", function(dets)
+        {
+            console.log( (Number(dets.target.textContent)))
+            var clickednumber =  (Number(dets.target.textContent));
+            if(clickednumber == hitrn)
+            {
+                scorecalc();
+                nhit();
+            }
+        });
+        runTime();
+        nhit();
+        
+       
+       
+        
+    </script>
+    
+</body>
+</html>
